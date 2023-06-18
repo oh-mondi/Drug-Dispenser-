@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+    <form method="POST" action="./login.php" name="login_form">
+    <div id="section1">
+        <label id="login_statement" for="login_statement">Login as:</label> <br>
+        <select id="firstComboBox" name="firstComboBox" onchange="changer()">
+            <option value="select">Select</option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+            <option value="pharmacy">Pharmacy</option>
+        </select>
+    </div>
+    <div id="section2" style="display: none;">
+        <br>
+            <label for="user_name">user_name:</label>
+            <input type="text" name="user_name" placeholder="Username">
+         <br>
+          
+             <label for="password">password:</label> 
+             <input type="password" name="password" placeholder="Password">
+        <br>
+    </div>
+    <script>
+        function changer() {
+            const firstComboBox = document.getElementById("firstComboBox");
+            const section2 = document.getElementById("section2");
+            const user_name = document.getElementById("user_name");
+            const password = document.getElementById("password");
+
+            if (firstComboBox.value !== "select_option") {
+                section2.style.display = 'block';
+                credentialsId.style.display = 'block';
+                password.style.display = 'block';
+            } else {
+                section2.style.display = 'none';
+                credentialsId.style.display = 'none';
+                password.style.display = 'none';
+            }
+        }
+    </script>
+       <button type="submit">Log In</button>
+    </form>
+</body>
+</html>
