@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Munchies Fast Food</title>
+    <link rel="stylesheet" href="css/signUp.css">
+</head>
+
+<!-- Header with image -->
+<header class="" id="home">
+  <div class="site-logo" style="text-align: left;">
+    <a href="home.html"><img src="" alt="" style="position:absolute;" ></a>
+  </div>
+  <div class="topnav">
+    <div class="navbar">
+      <a href="index.html" > HOME</a>
+      <a href="Drugs.html" > DRUGS</a>
+      <a href="OrderNow.html" > ORDER NOW</a>
+      <a href="ViewBlog.html" > BLOG</a>
+      <a href="AboutUs.html" > ABOUT US</a>
+      <a href="ContactUs.html" > CONTACT US</a>
+      <a href="SignIn.html" > SIGN IN</a>
+      <a href="SignUp.html" > SIGN UP</a>
+    </div>
+  </div>
+
+</header>
+
+<body>
+  <form action="action_page.php" style="border:1px solid #ccc">
+      <div class="container">
+        <h1 style="color: rgb(3, 228, 37);">Sign Up</h1>
+        <p style="color: rgb(3, 228, 37);">Please fill in this form to create an account.</p>
+        <hr>
+
+        <label for="fname" style="color: rgb(3, 228, 37);"><b>First name</b></label>
+        <input type="text" placeholder="Enter first name" name="fname" required>
+
+        <label for="mname" style="color: rgb(3, 228, 37);"><b>Middle name (*optional)</b></label>
+        <input type="text" placeholder="Enter middle name" name="mname" required>
+
+        <label for="lname" style="color: rgb(3, 228, 37);"><b>Last name</b></label>
+        <input type="text" placeholder="Enter last name" name="lname" required>
+    
+        <label for="email" style="color: rgb(3, 228, 37);"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+    
+        <label for="psw" style="color: rgb(3, 228, 37);"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+    
+        <label for="psw-repeat" style="color: rgb(3, 228, 37);"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+        <label for="phone" style="color: rgb(3, 228, 37);"><b>Enter Phone number</b></label><br>
+        <input type="tel" placeholder="Enter Phone number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required><br><br>
+    
+        <label style="color: rgb(3, 228, 37);">
+          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px" > Remember me
+        </label>
+    
+        <p style="color: rgb(3, 228, 37);">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        <p style="color: rgb(3, 228, 37);">Already have an account? <a href="signIn.html" style="color:dodgerblue">Sign In</a>.</p>
+    
+        <div class="clearfix">
+          <button type="button" class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Sign Up</button>
+        </div>
+      </div>
+    </form>
+</body>
+</html>
