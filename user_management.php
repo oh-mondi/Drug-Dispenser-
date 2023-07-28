@@ -129,7 +129,7 @@
                 // Add your code here for displaying user details
                 // Get the logged-in user's details from the database
                 $username = $_SESSION["user_name"];
-                $user = selectDataFromDatabase("localhost", "root", "", "db_tijani_tatu_150397", "Patients", "user_name", $username);
+                $user = selectDataFromDatabase("localhost", "root", "", "drugtool", "Patients", "user_name", $username);
 
                 if (!empty($user)) {
                     echo '<table>';

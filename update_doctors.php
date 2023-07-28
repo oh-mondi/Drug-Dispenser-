@@ -15,7 +15,7 @@
     $servername = "localhost";
     $db_username = "root";
     $db_password = "";
-    $database = "db_tijani_tatu_150397";
+    $database = "drugtool";
 
     $conn = new mysqli($servername, $db_username, $db_password, $database);
     if ($conn->connect_error) {
