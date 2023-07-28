@@ -1,29 +1,98 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
+    <style>
+        body {
+            background-color: #472786;
+            font-family: Arial, sans-serif;
+        }
+        
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #40E0D0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #40E0D0;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #40E0D0;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #40E0D0;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #20B2AA;
+        }
+        .photo-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .photo-container .photo {
+            flex-basis: calc(33.33% - 10px);
+            padding: 5px;
+        }
+
+        .photo-container .photo img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <form method="POST" action="./login.php" name="login_form">
+    <form method="POST" action="login.php" name="login_form">
     <div id="section1">
-        <label id="login_statement" for="login_statement">Login as:</label> <br>
+      <h1>  <label id="login_statement" for="login_statement">Login as:</label> <br></h1>
         <select id="firstComboBox" name="firstComboBox" onchange="changer()">
             <option value="select">Select</option>
             <option value="patient">Patient</option>
             <option value="doctor">Doctor</option>
             <option value="pharmacy">Pharmacy</option>
+            <option value="admin">Admin</option>
         </select>
     </div>
     <div id="section2" style="display: none;">
         <br>
             <label for="user_name">user_name:</label>
-            <input type="text" name="user_name" placeholder="Username">
+            <input type="text" name="user_name" placeholder="Username"
+            autocomplete="off">
          <br>
           
              <label for="password">password:</label> 
-             <input type="password" name="password" placeholder="Password">
+             <input type="password" name="password" placeholder="Password"
+             autocomplete="off">
         <br>
     </div>
     <script>
@@ -46,5 +115,7 @@
     </script>
        <button type="submit">Log In</button>
     </form>
+   
+    </div>
 </body>
 </html>

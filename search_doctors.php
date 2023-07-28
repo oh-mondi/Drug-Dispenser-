@@ -46,6 +46,7 @@
         .main-content {
             margin-left: 200px;
             padding: 20px;
+            background-color: white;
         }
 
         /* CSS for the heading */
@@ -88,41 +89,22 @@
             margin-top: auto;
         }
 
-        /* CSS for the profile card */
-        .profile-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid black; /* Black */
-        }
-
-        .profile-picture {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .profile-picture img {
+        /* CSS for the doctor search results table */
+        .doctor-table {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            border-collapse: collapse;
         }
 
-        .profile-info {
-            margin-bottom: 10px;
+        .doctor-table th,
+        .doctor-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
         }
 
-        .profile-info .title {
+        .doctor-table th {
+            background-color: #40E0D0; 
+            color: white;
             font-weight: bold;
-            color: #777;
-            margin-bottom: 5px;
-        }
-
-        .profile-info .value {
-            font-size: 14px;
         }
     </style>
 </head>
@@ -134,6 +116,7 @@
             </svg>
         </button>
         <ul>
+            <li><a href="patient.php">Home</a></li>
             <li><a href="appointments.php">Appointments</a></li>
             <li><a href="patient_prescription.php">Prescriptions</a></li>
             <li><a href="user_management.php">User Management</a></li>
@@ -144,57 +127,46 @@
     <div class="main-content">
         <h1>Welcome, Patient!</h1>
 
-        <div class="top-right">
-            <?php
-                require_once("functions.php");
-                require_once("database.php");
-                // Check if the user is logged in and their username is set in the session
-                session_start();
-                if (isset($_SESSION["user_name"])) {
-                    echo "Welcome, " . $_SESSION["user_name"] . "!";
+        <?php
+        // Make sure the form was submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            // Retrieve the selected specialty from the form data
+            $selectedSpecialty = $_GET['specialty'];
 
-                    // Display user details or form for updating details
-                    // Add your code here for displaying user details or the update form
-                    $username = $_SESSION["user_name"];
-                    $user = selectDataFromDatabase("localhost", "root", "", "drugtool", "Patients", "user_name", $username);
+            // Perform your database query to retrieve doctors with the selected specialty
+            require_once("database.php");
 
-                    echo '
-                    <div class="profile-card">
-                        <div class="profile-picture">
-                            <img src="photos/profile.png" alt="Profile Picture">
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Username:</div>
-                            <div class="value">' . $user[0]['USER_NAME'] . '</div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Name:</div>
-                            <div class="value">' . $user[0]['NAME'] . '</div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Age:</div>
-                            <div class="value">' . $user[0]['AGE'] . '</div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Address:</div>
-                            <div class="value">' . $user[0]['ADDRESS'] . '</div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Email:</div>
-                            <div class="value">'. $user[0]['EMAIL_ADDRESS'] . '</div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="title">Phone:</div>
-                            <div class="value">' . $user[0]['PHONE_NUMBER'] . '</div>
-                        </div>
-                    </div>';
-                } else {
-                    // Redirect to the login page if the user is not logged in
-                    header("Location: loginform.html");
-                    exit();
+            $sql = "SELECT * FROM doctors WHERE SPECIALITY = '$selectedSpecialty'";
+            $result = $conn->query($sql);
+
+            // Display the search results
+            if ($result->num_rows > 0) {
+                echo "<h3>Doctors with specialty: $selectedSpecialty</h3>";
+                echo "<table class='doctor-table'>";
+                echo "<tr><th class='column-username'>Username</th><th class='column-name'>Name</th><th class='column-speciality'>Speciality</th><th class='column-experience'>Years of Experience</th><th class='column-email'>Email
+                Address</th><th class='column-action'>Action</th></tr>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td class='column-username'>" . $row['USER_NAME'] . "</td>";
+                    echo "<td class='column-name'>" . $row['NAME'] . "</td>";
+                    echo "<td class='column-speciality'>" . $row['SPECIALITY'] . "</td>";
+                    echo "<td class='column-experience'>" . $row['YRS_OF_EXPERIENCE'] . "</td>";
+                    echo "<td class='column-email'>" . $row['EMAIL_ADDRESS'] . "</td>";
+                    echo "<td class='column-action'><a href='appointment_request.php?doctor_id=" . $row['USER_NAME'] . "'>Request Appointment</a></td>";
+                    echo "</tr>";
                 }
-            ?>
-        </div>
+                echo "</table>";
+            } else {
+                echo "<p>No doctors found with specialty: $selectedSpecialty</p>";
+            }
+
+            // Free the result set
+            $result->free();
+
+            // Close the database connection
+            $conn->close();
+        }
+        ?>
     </div>
 
     <script>
@@ -212,6 +184,7 @@
         }
     </script>
 
+    <!-- Add your content here -->
 
 </body>
 </html>

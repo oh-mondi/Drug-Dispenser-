@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Docors Dashboard</title>
+    <title>Patients Dashboard</title>
     <style>
         /* CSS for the sidebar */
         .sidebar {
@@ -134,28 +134,29 @@
             </svg>
         </button>
         <ul>
-            <li><a href="doctors_appointments.php">Appointments</a></li>
-            <li><a href="doctors_patients.php">Patients</a></li>
-            <li><a href="#" onclick="Logout()">Logout</a></li>
+            <li><a href="appointments.php">Appointments</a></li>
+            <li><a href="patient_prescription.php">Prescriptions</a></li>
+            <li><a href="user_management.php">User Management</a></li>
+            <li style="margin-top: auto;"><a href="#" onclick="Logout()">Logout</a></li>
         </ul>
     </div>
 
     <div class="main-content">
-        <h1>Welcome, Doctor!</h1>
+        <h1>Welcome, Patient!</h1>
 
         <div class="top-right">
             <?php
-               
-                require_once("database.php");
                 require_once("functions.php");
+                require_once("database.php");
                 // Check if the user is logged in and their username is set in the session
                 session_start();
                 if (isset($_SESSION["user_name"])) {
                     echo "Welcome, " . $_SESSION["user_name"] . "!";
 
-                  
+                    // Display user details or form for updating details
+                    // Add your code here for displaying user details or the update form
                     $username = $_SESSION["user_name"];
-                    $user = selectDataFromDatabase("localhost", "root", "", "drugtool", "doctors", "USER_NAME", $username);
+                    $user = selectDataFromDatabase("localhost", "root", "", "db_tijani_tatu_150397", "Patients", "user_name", $username);
 
                     echo '
                     <div class="profile-card">
@@ -164,7 +165,7 @@
                         </div>
                         <div class="profile-info">
                             <div class="title">Username:</div>
-                            <div class="value">' .  $user[0]['USER_NAME'] . '</div>
+                            <div class="value">' . $user[0]['USER_NAME'] . '</div>
                         </div>
                         <div class="profile-info">
                             <div class="title">Name:</div>
@@ -172,21 +173,24 @@
                         </div>
                         <div class="profile-info">
                             <div class="title">Age:</div>
-                            <div class="value">' . $user[0]['SPECIALTY'] . '</div>
+                            <div class="value">' . $user[0]['AGE'] . '</div>
                         </div>
                         <div class="profile-info">
                             <div class="title">Address:</div>
-                            <div class="value">' . $user[0]['YRS_OF_EXPERIENCE'] . '</div>
+                            <div class="value">' . $user[0]['ADDRESS'] . '</div>
                         </div>
                         <div class="profile-info">
                             <div class="title">Email:</div>
                             <div class="value">'. $user[0]['EMAIL_ADDRESS'] . '</div>
                         </div>
-                      
+                        <div class="profile-info">
+                            <div class="title">Phone:</div>
+                            <div class="value">' . $user[0]['PHONE_NUMBER'] . '</div>
+                        </div>
                     </div>';
                 } else {
                     // Redirect to the login page if the user is not logged in
-                    header("Location: login.php");
+                    header("Location: loginform.html");
                     exit();
                 }
             ?>
@@ -194,7 +198,7 @@
     </div>
 
     <script>
-          function Logout() {
+        function Logout() {
             // Display confirmation alert
             if (confirm("Are you sure you want to end the session?")) {
                 // Destroy the session
@@ -208,7 +212,6 @@
         }
     </script>
 
-    <!-- Add your content here -->
 
 </body>
 </html>
